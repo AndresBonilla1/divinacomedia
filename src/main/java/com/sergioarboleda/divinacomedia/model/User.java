@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.sergioarboleda.divinacomedia.model;
 
 import java.io.Serializable;
@@ -16,11 +12,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Clase User, esta clase permite crear objetos tipo user para . Utiliza lombok
- * para simplificar la codificación. Esta clase posee todos sus atributos
- * encapsulados y posee dos constructores: uno vacio y el otro incluyendo todos
- * sus argumentos.
- * 
+ * Esta clase es un entity, implementa la interface Serializable y corresponde
+ * a la tabla user en la base de datos. Utiliza lombok para simplificar la
+ * codificación. Esta clase posee todos sus atributos encapsulados y dos
+ * constructores: uno vacio y el otro con todos sus atributos.
+ *
  * @since 24-Nov-2021
  * @version 1.0
  * @author Andres Bonilla
@@ -31,17 +27,32 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "user")
 public class User implements Serializable {
-    
+
+    /**
+     * Este atributo corresponde a la llave primaria de la tabla, es de tipo
+     * Integer y autoincremental.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
+
+    /**
+     * Este atributo corresponde al email del usuario, es unico, varchar(50) y
+     * not null.
+     */
     @Column(name = "user_mail", unique = true, length = 50, nullable = false)
     private String email;
-    
+
+    /**
+     * Este atributo corresponde a la contraseña del usuario, varchar(50) y not
+     * null.
+     */
     @Column(name = "user_password", length = 50, nullable = false)
     private String password;
-    
+
+    /**
+     * Este atributo corresponde al nombre del usuario, varchar(80) y not null.
+     */
     @Column(name = "user_name", length = 80, nullable = false)
     private String name;
 }
