@@ -3,18 +3,18 @@ package com.sergioarboleda.divinacomedia.repository.crud;
 import com.sergioarboleda.divinacomedia.model.User;
 import java.util.List;
 import java.util.Optional;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
- * Esta interface extiende de CrudRepository, contiene el CRUD para la tabla
- * User con llave primaria Integer y las consultas especificas para validar
+ * Esta interface extiende de CrudRepository, contiene el CRUD para la colección
+ * usuarios con llave primaria Integer y las consultas especificas para validar
  * datos del usuario.
  * 
  * @since 24-Nov-2021
  * @version 1.0
  * @author Andres Bonilla
  */
-public interface UserCrudRepository extends CrudRepository<User, Integer> {
+public interface UserCrudRepository extends MongoRepository<User, Integer> {
 
     /**
      * Método que busca un usuario con el nombre ingresado y retorna un 
@@ -22,7 +22,7 @@ public interface UserCrudRepository extends CrudRepository<User, Integer> {
      * devuelve null.
      * 
      * @param name Nombre del usuario
-     * @return Usuario o null en caso de no encontrarlo
+     * @return User o null en caso de no encontrarlo
      */
     public Optional<User> findByName(String name);
 
@@ -42,7 +42,7 @@ public interface UserCrudRepository extends CrudRepository<User, Integer> {
      * devuelve null.
      * 
      * @param email Correo del usuario
-     * @return Usuario o null en caso de no encontrarlo
+     * @return User o null en caso de no encontrarlo
      */
     public Optional<User> findByEmail(String email);
 
@@ -53,7 +53,17 @@ public interface UserCrudRepository extends CrudRepository<User, Integer> {
      * 
      * @param email Correo del usuario
      * @param password Contrasela del usuario
-     * @return Usuario o null en caso de no encontrarlo
+     * @return User o null en caso de no encontrarlo
      */
     public Optional<User> findByEmailAndPassword(String email, String password);
+    
+    /**
+     * Método que busca a los usuarios con el id, email y nombre ingresados.
+     * 
+     * @param id Id del usuario
+     * @param email Email del usuario
+     * @param name Nombre del usuario
+     * @return Una lista de usuarios coincidentes con la busqueda
+     */
+    public List<User> findByIdOrEmailOrName(Integer id, String email, String name);
 }

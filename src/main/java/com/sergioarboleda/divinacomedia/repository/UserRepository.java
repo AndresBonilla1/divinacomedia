@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.sergioarboleda.divinacomedia.repository;
 
 import com.sergioarboleda.divinacomedia.model.User;
@@ -12,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 /**
- * Esta clase es el repositorio de la tabla user e implememta todos los
+ * Esta clase es el repositorio de la colección user e implememta todos los
  * métodos necesarios para el manejo de datos, a traves de la injección de
  * dependencias de la clase UserCrudRepository.
  * 
@@ -42,7 +38,7 @@ public class UserRepository {
      * Obtiene un optional tipo usuario con el id.
      * 
      * @param id Id del usuario
-     * @return Usuario o null si no lo encuentra
+     * @return User o null si no lo encuentra
      */
     public Optional<User> getUserById(Integer id) {
         return repository.findById(id);
@@ -52,7 +48,7 @@ public class UserRepository {
      * Obtiene un optional tipo usuario con el nombre.
      * 
      * @param name Nombre del usuario
-     * @return Usuario o null si no lo encuentra
+     * @return User o null si no lo encuentra
      */
     public Optional<User> getUserByName(String name) {
         return repository.findByName(name);
@@ -62,7 +58,7 @@ public class UserRepository {
      * Obtiene un optional tipo usuario con el correo.
      * 
      * @param email Correo del usuario
-     * @return Usuario o null si no lo encuentra
+     * @return User o null si no lo encuentra
      */
     public Optional<User> getUserByEmail(String email) {
         return repository.findByEmail(email);
@@ -86,20 +82,41 @@ public class UserRepository {
      * 
      * @param email Correo del usuario
      * @param password Contraseña del usuario
-     * @return Usuario o null si no lo encuentra
+     * @return User o null si no lo encuentra
      */
     public Optional<User> getUserByEmailAndPassword(String email, String password) {
         return repository.findByEmailAndPassword(email, password);
     }
 
     /**
-     * Guarda un usuario.
+     * Guarda un usuario, si ya existe lo actualiza.
      * 
-     * @param user Usuario
-     * @return Usuario guardado
+     * @param user User
+     * @return User guardado
      */
     public User save(User user) {
         return repository.save(user);
     }
 
+    /**
+     * Elimina un usuario por el id.
+     * 
+     * @param id Id del usuaruo a borrar
+     */
+    public void delete(Integer id) {
+        repository.deleteById(id);
+    }
+    
+    /**
+     * Método que obtiene una lista de usuarios con el id, email y nombre
+     * ingresados.
+     * 
+     * @param id Id del usuario
+     * @param email Email del usuario
+     * @param name Nombre del usuario
+     * @return Lista de usuarios
+     */
+    public List<User> getUserByIdOrEmailOrName(Integer id, String email, String name) {
+        return repository.findByIdOrEmailOrName(id, email, name);
+    }
 }

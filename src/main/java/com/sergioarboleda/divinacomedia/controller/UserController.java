@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.sergioarboleda.divinacomedia.controller;
 
 import com.sergioarboleda.divinacomedia.model.User;
@@ -10,9 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -20,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Clase tipo controller que maneja el contexto de las peticiones a los
- * servicios relacionados con la tabla user, utilizando los métodos de la clase
- * UserService.
+ * servicios relacionados con la colección user, utilizando los métodos de la
+ * clase UserService.
  * 
  * @since 24-Nov-2021
  * @version 1.0
@@ -51,8 +49,8 @@ public class UserController {
     /**
      * Guarda un usuario en la base de datos.
      * 
-     * @param user Usuario a guardar
-     * @return Usuario enviado
+     * @param user User a guardar
+     * @return User enviado
      */
     @PostMapping("/new")
     @ResponseStatus(HttpStatus.CREATED)
@@ -61,13 +59,37 @@ public class UserController {
     }
 
     /**
+     * Actualiza un usuario de la base de datos.
+     * 
+     * @param user Usuario
+     * @return Usuario enviado
+     */
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public User update(@RequestBody User user) {
+        return service.update(user);
+    }
+    
+    /**
+     * Borra a un usuario por el id de la base de datos.
+     * 
+     * @param id Id del usuario
+     * @return Usuario enviado
+     */
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean delete(@RequestBody Integer id) {
+        return service.delete(id);
+    }
+    
+    /**
      * Valida que exista un usuario con el email ingresado, si lo encuentra
      * devuelve true, de lo contrario devuelve false.
      * 
      * @param email Correo a buscar
      * @return True si se encotro el correo, sino devuelve false
      */
-    @GetMapping("/{email}")
+    @GetMapping("/emailexist/{email}")
     public boolean existEmail(@PathVariable("email") String email) {
         return service.getUserByEmail(email);
     }
@@ -78,7 +100,7 @@ public class UserController {
      * 
      * @param email Correo del usuario
      * @param password Contraseña del usuario
-     * @return Usuario
+     * @return User
      */
     @GetMapping("/{email}/{password}")
     public User validarUser(@PathVariable("email") String email, @PathVariable("password") String password) {
