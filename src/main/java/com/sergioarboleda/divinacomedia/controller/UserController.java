@@ -73,13 +73,13 @@ public class UserController {
     /**
      * Borra a un usuario por el id de la base de datos.
      * 
-     * @param id Id del usuario
+     * @param id_pk Id del usuario
      * @return Usuario enviado
      */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public boolean delete(@PathVariable Integer id) {
-        return service.delete(id);
+    public boolean delete(@PathVariable("id") Integer id_pk) {
+        return service.delete(id_pk);
     }
     
     /**
