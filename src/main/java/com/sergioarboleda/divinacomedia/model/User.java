@@ -41,16 +41,6 @@ public class User {
     private String name;
     
     /**
-     * Este atributo corresponde a la fecha de nacimiento del usuario.
-     */
-    private Date birthtDay;
-    
-    /**
-     * Este atributo corresponde al mes de nacimiento del usuario.
-     */
-    private String monthBirthtday;
-    
-    /**
      * Este atributo corresponde a la direccion del usuario.
      */
     private String address;
