@@ -77,7 +77,7 @@ public class HairProductService {
      */
     public HairProduct update(HairProduct product) {
         Optional<HairProduct> existProduct = repository.getByReference(product.getId());
-        if (existProduct.isEmpty()) {
+        if (existProduct.isPresent()) {
             if (product.getAvailability()!= null) {
                 existProduct.get().setAvailability(product.getAvailability());
             }

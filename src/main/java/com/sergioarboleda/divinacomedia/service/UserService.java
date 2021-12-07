@@ -78,7 +78,7 @@ public class UserService {
      */
     public User update(User user) {
         Optional<User> existUser = repository.getUserById(user.getId());
-        if (existUser.isEmpty()) {
+        if (existUser.isPresent()) {
             if (user.getIdentification() != null) {
                 existUser.get().setIdentification(user.getIdentification());
             }
