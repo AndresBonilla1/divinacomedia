@@ -75,7 +75,17 @@ public class HairProductController {
      */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public boolean delete(@PathVariable String id) {
+    public boolean delete(@PathVariable("id") String id) {
         return service.delete(id);
+    }
+    
+    /**
+     * Valida si la referencia de un producto existe o no.
+     * @param reference Referencia del producto
+     * @return True si la referencia existe, sino devuelve false
+     */
+    @GetMapping("/existproduct/{id}")
+    public boolean existProduct(@PathVariable("id") String reference) {
+        return service.existProduct(reference);
     }
 }

@@ -6,9 +6,9 @@ import java.util.Optional;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
- * Esta interface extiende de CrudRepository, contiene el CRUD para la colección
- * usuarios con llave primaria Integer y las consultas especificas para validar
- * datos del usuario.
+ * Esta interface extiende de MongoRepository, contiene el CRUD para la
+ * colección usuarios con llave primaria Integer y las consultas especificas
+ * para validar datos del usuario.
  * 
  * @since 24-Nov-2021
  * @version 1.0

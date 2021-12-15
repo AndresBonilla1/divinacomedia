@@ -1,6 +1,5 @@
 package com.sergioarboleda.divinacomedia.model;
 
-import java.util.Date;
 import javax.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;

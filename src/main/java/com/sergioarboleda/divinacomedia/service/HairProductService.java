@@ -43,6 +43,17 @@ public class HairProductService {
     public Optional<HairProduct> getProductoByReference(String reference) {
         return repository.getByReference(reference);
     }
+    
+    /**
+     * Valida si la referencia del producto existe en la base de datos, si
+     * existe develve true, sino devuelve false.
+     * 
+     * @param reference Referencia del producto
+     * @return True si la referencia existe, sino devuelve false
+     */
+    public boolean existProduct(String reference){
+        return getProductoByReference(reference).isPresent();
+    }
 
     /**
      * Guarda un producto validando que la referencia del usuario no exista y

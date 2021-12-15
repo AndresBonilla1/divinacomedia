@@ -39,8 +39,18 @@ public class UserService {
      * @param id Id del usuario
      * @return Usuario o null si no lo encuentra
      */
-    public Optional<User> getUserById(Integer id) {
+    public Optional<User> getOptionalUserById(Integer id) {
         return repository.getUserById(id);
+    }
+    
+    /**
+     * Obtiene un usuario por el id, si no existe retorna un usuario vacio.
+     * 
+     * @param id Id del usuario
+     * @return Usuario
+     */
+    public User getUserById(Integer id) {
+        return repository.getUserById(id).orElse(new User());
     }
 
     /**
@@ -53,7 +63,27 @@ public class UserService {
      */
     public User save(User user) {
         if (user.getId() == null) {
-            return user;
+            // Colocandole un id cuando no lo trae
+            List<User> allUsers = repository.getAll();
+            if (!allUsers.isEmpty()) {
+                int ultimoId = allUsers.get(allUsers.size()-1).getId();
+                user.setId(ultimoId + 1);
+            } else {
+                user.setId(1);
+            }
+            
+            // Validando campos
+            if (user.getIdentification() == null || user.getEmail() == null || user.getName() == null || user.getPassword() == null
+                    || user.getType() == null || user.getZone() == null) {
+                return user;
+            } else {
+                List<User> existUser = repository.getUserByIdOrEmailOrName(user.getId(), user.getEmail(), user.getName());
+                if (existUser.isEmpty()) {
+                    return repository.save(user);
+                } else {
+                    return user;
+                }
+            }
         } else {
             if (user.getIdentification() == null || user.getEmail() == null || user.getName() == null || user.getPassword() == null
                     || user.getType() == null || user.getZone() == null) {
@@ -116,7 +146,7 @@ public class UserService {
      * @return True si lo borro, de lo contrario false
      */
     public boolean delete(Integer id) {
-        Boolean aBoolean = getUserById(id).map(user -> {
+        Boolean aBoolean = getOptionalUserById(id).map(user -> {
             repository.delete(user.getId());
             return true;
         }).orElse(false);
@@ -132,6 +162,17 @@ public class UserService {
      */
     public boolean getUserByEmail(String email) {
         return repository.getUserByEmail(email).isPresent();
+    }
+    
+    /**
+     * Valida que un usuario tenga ese nombre, si encuentra un usuario devuelve
+     * true, de lo contrario devuelve false.
+     * 
+     * @param name Nombre del usuario
+     * @return True si encontro un usuario con el correo, sino devuelve false
+     */
+    public boolean getUserByName (String name) {
+        return repository.getUserByName(name).isPresent();
     }
 
     /**

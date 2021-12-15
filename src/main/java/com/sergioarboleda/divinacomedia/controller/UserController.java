@@ -73,13 +73,13 @@ public class UserController {
     /**
      * Borra a un usuario por el id de la base de datos.
      * 
-     * @param id_pk Id del usuario
+     * @param id Id del usuario
      * @return Usuario enviado
      */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public boolean delete(@PathVariable("id") Integer id_pk) {
-        return service.delete(id_pk);
+    public boolean delete(@PathVariable("id") Integer id) {
+        return service.delete(id);
     }
     
     /**
@@ -92,6 +92,18 @@ public class UserController {
     @GetMapping("/emailexist/{email}")
     public boolean existEmail(@PathVariable("email") String email) {
         return service.getUserByEmail(email);
+    }
+    
+    /**
+     * Valida que exista un usuario con el nombre ingresado, si lo encuentra
+     * devuelve true, de lo contrario devuelve false.
+     * 
+     * @param name Nombre a buscar
+     * @return True si se encotro el correo, sino devuelve false
+     */
+    @GetMapping("/nameexist/{name}")
+    public boolean existName(@PathVariable("name") String name) {
+        return service.getUserByName(name);
     }
 
     /**
@@ -106,5 +118,15 @@ public class UserController {
     public User validarUser(@PathVariable("email") String email, @PathVariable("password") String password) {
         return service.getUserByEmailAndPassword(email, password);
     }
-
+    
+    /**
+     * Obtiene un usuario por el id, si no existe devuelve un usuario vacio.
+     * 
+     * @param id Id del usuario
+     * @return Usuario
+     */
+    @GetMapping("/{id}")
+    public User getUserById(@PathVariable("id") Integer id) {
+        return service.getUserById(id);
+    }
 }

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 /**
  * Esta clase es el repositorio de la colección user e implememta todos los
  * métodos necesarios para el manejo de datos, a traves de la injección de
- * dependencias de la clase UserCrudRepository.
+ * dependencias de la interface UserCrudRepository.
  * 
  * @since 24-Nov-2021
  * @version 1.0
