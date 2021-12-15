@@ -1,5 +1,6 @@
 package com.sergioarboleda.divinacomedia.model;
 
+import java.util.Date;
 import javax.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -38,6 +39,16 @@ public class User {
      * Este atributo corresponde al nombre del usuario, varchar(80) y not null.
      */
     private String name;
+    
+    /**
+     * Este atributo corresponde a la fecha de nacimiento.
+     */
+    private Date birthtDay;
+    
+    /**
+     * Este atributo corresponde al mes de nacimiento.
+     */
+    private String monthBirthtDay;
     
     /**
      * Este atributo corresponde a la direccion del usuario.

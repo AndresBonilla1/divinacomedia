@@ -46,6 +46,16 @@ public class OrderController {
     }
     
     /**
+     * Obtiene una lista con todas las ordenes registradas.
+     * 
+     * @return Lista de ordenes
+     */
+    @GetMapping("/all")
+    public List<Order> getAll() {
+        return service.getAll();
+    }
+    
+    /**
      * Obtiene una lista con las ordenes por zona.
      * 
      * @param zone Zona

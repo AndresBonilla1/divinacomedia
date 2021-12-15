@@ -32,6 +32,15 @@ public class OrderService {
     public Order getOrderById(Integer id) {
         return repository.getOrderById(id).orElse(new Order());
     }
+    
+    /**
+     * Obtiene una lista con todas las ordenes en la base de datos.
+     * 
+     * @return Lista de ordenes
+     */
+    public List<Order> getAll() {
+        return repository.getAll();
+    }
 
     /**
      * Obtiene una lista con las ordenes de una zona.
