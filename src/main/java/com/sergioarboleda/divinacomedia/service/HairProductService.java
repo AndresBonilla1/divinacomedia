@@ -40,8 +40,19 @@ public class HairProductService {
      * @param reference Referencia del producto
      * @return Producto o null si no lo encuentra
      */
-    public Optional<HairProduct> getProductoByReference(String reference) {
+    public Optional<HairProduct> getOptionalProductByRef(String reference) {
         return repository.getByReference(reference);
+    }
+    
+    /**
+     * Obtiene un producto por su referencia, si no lo encuentra devuelve un
+     * HairProduct vacio.
+     * 
+     * @param reference Referencia
+     * @return Producto
+     */
+    public HairProduct getProductByReference(String reference) {
+        return getOptionalProductByRef(reference).orElse(new HairProduct());
     }
     
     /**
@@ -52,7 +63,7 @@ public class HairProductService {
      * @return True si la referencia existe, sino devuelve false
      */
     public boolean existProduct(String reference){
-        return getProductoByReference(reference).isPresent();
+        return getOptionalProductByRef(reference).isPresent();
     }
 
     /**
@@ -126,7 +137,7 @@ public class HairProductService {
      * @return True si lo borro, de lo contrario false
      */
     public boolean delete(String reference) {
-        Boolean aBoolean = getProductoByReference(reference).map(product -> {
+        Boolean aBoolean = getOptionalProductByRef(reference).map(product -> {
             repository.delete(product.getId());
             return true;
         }).orElse(false);

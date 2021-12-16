@@ -5,6 +5,7 @@ import com.sergioarboleda.divinacomedia.model.Order;
 import com.sergioarboleda.divinacomedia.service.OrderService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -73,6 +75,7 @@ public class OrderController {
      * @return Orden
      */
     @PostMapping("/new")
+    @ResponseStatus(HttpStatus.CREATED)
     public Order save(@RequestBody Order order){
         return service.save(order);
     }
@@ -84,6 +87,7 @@ public class OrderController {
      * @return Orden actualizada
      */
     @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
     public Order actualizarEstado(@RequestBody Actualizar info) {
         return service.actualizarEstado(info.getStatus(), info.getId());
     }

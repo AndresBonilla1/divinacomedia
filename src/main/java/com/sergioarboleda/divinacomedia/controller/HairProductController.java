@@ -42,6 +42,17 @@ public class HairProductController {
     public List<HairProduct> getAll() {
         return service.getAll();
     }
+    
+    /**
+     * Obtiene un producto por su referencia.
+     * 
+     * @param reference Referencia
+     * @return Producto
+     */
+    @GetMapping("/{id}")
+    public HairProduct getByReference(@PathVariable("id") String reference) {
+        return service.getProductByReference(reference);
+    }
 
     /**
      * Guarda un product en la base de datos.
