@@ -117,10 +117,10 @@ public class OrderService {
         } else {
             if (state.equalsIgnoreCase("Aprobada")) {
                 order.setStatus(Order.APROVED);
-                return order;
+                return repository.save(order);
             } else if (state.equalsIgnoreCase("Rechazada")) {
                 order.setStatus(Order.REJECTED);
-                return order;
+                return repository.save(order);
             }
             return order;
         }
