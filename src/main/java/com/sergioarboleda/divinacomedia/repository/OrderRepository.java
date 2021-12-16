@@ -51,9 +51,9 @@ public class OrderRepository {
      * @return Lista con todas las ordenes
      */
     public List<Order> getAll() {
-        return repository.findAll();
+        return (List<Order>) repository.findAll();
     }
-
+    
     /**
      * Guarda una orden en la base de datos, si existe lo actualiza.
      *

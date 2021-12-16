@@ -4,6 +4,7 @@ import com.sergioarboleda.divinacomedia.model.Order;
 import com.sergioarboleda.divinacomedia.repository.OrderRepository;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -21,6 +22,7 @@ public class OrderService {
     /**
      * Este atributo es la instancia del repositorio OrderRepository.
      */
+    @Autowired
     private OrderRepository repository;
 
     /**
