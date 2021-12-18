@@ -91,4 +91,40 @@ public class OrderController {
     public Order actualizarEstado(@RequestBody Actualizar info) {
         return service.actualizarEstado(info.getStatus(), info.getId());
     }
+    
+    /**
+     * Obtiene una lista de ordenes buscando por la fecha de registro y el id
+     * del salesMan.
+     * 
+     * @param date Fecha de registro
+     * @param id Id del salesMAn
+     * @return Lista de ordenes
+     */
+    @GetMapping("/date/{date}/{id}")
+    public List<Order> getByRegisterDayBetweenAndSalesMan_id(@PathVariable("date") String date, @PathVariable("id") Integer id) {
+        return service.getOrdersByRegisterDaySalesManId(date, id);
+    }
+    
+    /**
+     * Obtiene una lista de ordenes por el status y el id del salesMan.
+     * 
+     * @param status Status de la orden
+     * @param id Id del salesMan
+     * @return Lista de ordenes
+     */
+    @GetMapping("/state/{status}/{id}")
+    public List<Order> getByStatusAndSalesMan_id(@PathVariable("status") String status, @PathVariable("id") Integer id) {
+        return service.getByStatusAndSalesMan_id(status, id);
+    }
+    
+    /**
+     * Obtiene una lista de ordenes por el id del salesMan.
+     * 
+     * @param id Id del salesMan
+     * @return Lista de ordenes
+     */
+    @GetMapping("/salesman/{id}")
+    public List<Order> getBySalesMan_id(@PathVariable("id") Integer id) {
+        return service.getBySalesMan_id(id);
+    }
 }

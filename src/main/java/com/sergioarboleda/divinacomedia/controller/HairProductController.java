@@ -30,6 +30,9 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "*")
 public class HairProductController {
     
+    /**
+     * Este atributo es la instancia de la interface HairProductService.
+     */
     @Autowired
     private HairProductService service;
     

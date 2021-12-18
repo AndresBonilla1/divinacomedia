@@ -2,6 +2,10 @@ package com.sergioarboleda.divinacomedia.service;
 
 import com.sergioarboleda.divinacomedia.model.Order;
 import com.sergioarboleda.divinacomedia.repository.OrderRepository;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,10 +38,10 @@ public class OrderService {
     public Order getOrderById(Integer id) {
         return repository.getOrderById(id).orElse(new Order());
     }
-    
+
     /**
      * Obtiene una lista con todas las ordenes en la base de datos.
-     * 
+     *
      * @return Lista de ordenes
      */
     public List<Order> getAll() {
@@ -103,8 +107,8 @@ public class OrderService {
     }
 
     /**
-     * Función que actualiza el estado de una orden, usando el id de la orden
-     * y el estado especificado.
+     * Función que actualiza el estado de una orden, usando el id de la orden y
+     * el estado especificado.
      *
      * @param state Estado
      * @param id Id de la orden
@@ -124,5 +128,46 @@ public class OrderService {
             }
             return order;
         }
+    }
+
+    /**
+     * Recibe una fecha inicial y genera un rango para buscar en ese dia y con
+     * el id del salesMan obtiene una lista de ordenes con esos requisitos.
+     * 
+     * @param registerDay Fecha de registro
+     * @param id Id del salesMan
+     * @return Lista de ordenes
+     */
+    public List<Order> getOrdersByRegisterDaySalesManId(String registerDay, Integer id) {
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate fechaActual = LocalDate.parse(registerDay, f);
+        
+        Date fecha1 = Date.from(fechaActual.minusDays(1).atStartOfDay()
+                .atZone(ZoneId.systemDefault()).toInstant());
+        Date fecha2 = Date.from(fechaActual.plusDays(1).atStartOfDay()
+                .atZone(ZoneId.systemDefault()).toInstant());
+        
+        return repository.getByRegisterDayBetweenAndSalesMan_id(fecha1, fecha2, id);
+    }
+    
+    /**
+     * Obtiene una lista de ordenes por el status y el id del salesMan.
+     * 
+     * @param status
+     * @param id
+     * @return Lista de ordenes
+     */
+    public List<Order> getByStatusAndSalesMan_id(String status, Integer id) {
+        return repository.getByStatusAndSalesMan_id(status, id);
+    }
+    
+    /**
+     * Obtiene una lista de ordenes por el id del salesMan.
+     * 
+     * @param id Id del salesMan
+     * @return Lista de ordenes
+     */
+    public List<Order> getBySalesMan_id(Integer id) {
+        return repository.getBySalesMan_id(id);
     }
 }

@@ -2,6 +2,7 @@ package com.sergioarboleda.divinacomedia.repository;
 
 import com.sergioarboleda.divinacomedia.model.Order;
 import com.sergioarboleda.divinacomedia.repository.crud.OrderCrudRepository;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,5 +63,39 @@ public class OrderRepository {
      */
     public Order save(Order order) {
         return repository.save(order);
+    }
+    
+    /**
+     * Obtiene una lista de ordenes filtrando por rango de fecha de registro y
+     * el id del salesMan.
+     * 
+     * @param registerDate Fecha 1
+     * @param registerDate2 Fecha 2
+     * @param id Id del salesMan
+     * @return Lista de ordenes
+     */
+    public List<Order> getByRegisterDayBetweenAndSalesMan_id(Date registerDate, Date registerDate2, Integer id) {
+        return repository.findByRegisterDayBetweenAndSalesMan_id(registerDate, registerDate2, id);
+    }
+    
+    /**
+     * Obtiene una lista de ordenes por el status y el id del salesMan.
+     * 
+     * @param status Status de las ordenes
+     * @param id Id del salesMan
+     * @return Lista de ordenes
+     */
+    public List<Order> getByStatusAndSalesMan_id(String status, Integer id) {
+        return repository.findByStatusAndSalesMan_id(status, id);
+    }
+    
+    /**
+     * Obtiene una lista de ordenes por el id del salesMan.
+     * 
+     * @param id Id del salesMan
+     * @return Lista de ordenes
+     */
+    public List<Order> getBySalesMan_id(Integer id) {
+        return repository.findBySalesMan_id(id);
     }
 }
