@@ -129,4 +129,15 @@ public class UserController {
     public User getUserById(@PathVariable("id") Integer id) {
         return service.getUserById(id);
     }
+    
+    /**
+     * Obtiene una lista de usuarios por el mes de nacimiento.
+     * 
+     * @param month Mes de nacimiento
+     * @return Lista de usuarios
+     */
+    @GetMapping("/birthday/{month}")
+    public List<User> getByMonthBirthtDay(@PathVariable("month")String month) {
+        return service.getByMonthBirthtDay(month);
+    }
 }

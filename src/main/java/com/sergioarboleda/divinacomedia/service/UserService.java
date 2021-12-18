@@ -192,4 +192,13 @@ public class UserService {
         }
     }
 
+    /**
+     * Obtiene una lista de usuarios por el mes de nacimiento.
+     * 
+     * @param month Mes de nacimiento
+     * @return Lista de usuarios
+     */
+    public List<User> getByMonthBirthtDay(String month) {
+        return repository.getByMonthBirthtDay(month);
+    }
 }

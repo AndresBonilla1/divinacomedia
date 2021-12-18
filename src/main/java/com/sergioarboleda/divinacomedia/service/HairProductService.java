@@ -154,4 +154,25 @@ public class HairProductService {
         return product.getAvailability() == null || product.getBrand() == null || product.getCategory() == null || product.getDescription() == null
                 || product.getName() == null || product.getPhotography() == null || product.getPrice() == null || product.getQuantity() == null;
     }
+    
+    /**
+     * Obtiene una lista de productos con el precio menor o igual al buscado.
+     * 
+     * @param precio Precio
+     * @return Lista de productos
+     */
+    public List<HairProduct> getByPriceLessThanEqual(Double precio) {
+        return repository.getByPriceLessThanEqual(precio);
+    }
+    
+    /**
+     * Obtiene uuna lista de productos cuya descripción este contenida en la
+     * descripción en la de algún producto.
+     * 
+     * @param descripcion Descripción
+     * @return Lista de productos
+     */
+    public List<HairProduct> getByDescriptionLike(String descripcion) {
+        return repository.getByDescriptionLike(descripcion);
+    }
 }

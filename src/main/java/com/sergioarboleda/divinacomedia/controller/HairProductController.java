@@ -102,4 +102,27 @@ public class HairProductController {
     public boolean existProduct(@PathVariable("id") String reference) {
         return service.existProduct(reference);
     }
+    
+    /**
+     * Obtiene una lista de productos con el precio menor o igual al buscado.
+     * 
+     * @param precio Precio
+     * @return Lista de productos
+     */
+    @GetMapping("/price/{price}")
+    public List<HairProduct> getByPriceLessThanEqual(@PathVariable("price") Double precio) {
+        return service.getByPriceLessThanEqual(precio);
+    }
+    
+    /**
+     * Obtiene uuna lista de productos cuya descripción este contenida en la
+     * descripción en la de algún producto.
+     * 
+     * @param descripcion Descripción
+     * @return Lista de productos
+     */
+    @GetMapping("/description/{description}")
+    public List<HairProduct> getByDescriptionLike(@PathVariable("description") String descripcion) {
+        return service.getByDescriptionLike(descripcion);
+    }
 }

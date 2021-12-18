@@ -119,4 +119,14 @@ public class UserRepository {
     public List<User> getUserByIdOrEmailOrName(Integer id, String email, String name) {
         return repository.findByIdOrEmailOrName(id, email, name);
     }
+    
+    /**
+     * Obtiene una lista de usuarios por el mes de nacimiento.
+     * 
+     * @param month Mes de nacimiento
+     * @return Lista de usuarios
+     */
+    public List<User> getByMonthBirthtDay(String month) {
+        return repository.findByMonthBirthtDay(month);
+    }
 }

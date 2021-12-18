@@ -66,4 +66,12 @@ public interface UserCrudRepository extends MongoRepository<User, Integer> {
      * @return Una lista de usuarios coincidentes con la busqueda
      */
     public List<User> findByIdOrEmailOrName(Integer id, String email, String name);
+    
+    /**
+     * Método que obtiene una lista de usuarios por el mes de nacimiento.
+     * 
+     * @param monthBirthtDay Mes de nacimiento
+     * @return Lista de ordenes
+     */
+    public List<User> findByMonthBirthtDay(String monthBirthtDay);
 }

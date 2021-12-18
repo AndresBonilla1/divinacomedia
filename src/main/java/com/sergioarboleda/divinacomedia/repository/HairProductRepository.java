@@ -62,4 +62,25 @@ public class HairProductRepository {
     public void delete(String id) {
         repository.deleteById(id);
     }
+    
+    /**
+     * Obtiene una lista de productos con el precio menor o igual al buscado.
+     * 
+     * @param precio Precio
+     * @return Lista de productos
+     */
+    public List<HairProduct> getByPriceLessThanEqual(Double precio) {
+        return repository.findByPriceLessThanEqual(precio);
+    }
+    
+    /**
+     * Obtiene uuna lista de productos cuya descripción este contenida en la
+     * descripción en la de algún producto.
+     * 
+     * @param descripcion Descripción
+     * @return Lista de productos
+     */
+    public List<HairProduct> getByDescriptionLike(String descripcion) {
+        return repository.findByDescriptionLike(descripcion);
+    }
 }
